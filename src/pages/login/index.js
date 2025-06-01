@@ -25,20 +25,23 @@ export default function Login() {
           googleUid: result.user.uid,
           email: result.user.email,
           name: result.user.displayName,
-          photo: result.user.photoURL,
+          picture: result.user.photoURL,
         })
-      }).then(
-        (response) => {
-          if (response.ok) {
-            router.push("/home");
-            console.log("Usuário cadastrado com sucesso");
-            localStorage.setItem("user", JSON.stringify(result.user));
+      }).then(async (response) => {
+        if (response.ok) {
+          const data = await response.json();
+          localStorage.setItem("user", JSON.stringify(result.user));
+          localStorage.setItem("firstLogin", data.isFirstLogin ? "true" : "false");
+          if (data.isFirstLogin) {
+            router.push("/onboarding");
           } else {
-            alert("Erro ao cadastrar usuário");
-            console.error(response);
+            router.push("/home");
           }
+        } else {
+          alert("Erro ao cadastrar usuário");
+          console.error(response);
         }
-      );
+      });
     } catch (err) {
       alert("Erro no login: " + err.message);
     }
