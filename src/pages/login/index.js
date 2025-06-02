@@ -16,7 +16,7 @@ export default function Login() {
     try {
       const result = await signInWithPopup(auth, provider);
       setUser(result.user);
-      fetch('http://localhost:3001/users/', {
+      fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/users/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

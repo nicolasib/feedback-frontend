@@ -11,7 +11,7 @@ export default function Home() {
     if (typeof window !== "undefined") {
       const user = localStorage.getItem("user");
       if (user) {
-        router.push("/dashboard");
+        router.push("/home");
       }else{
         router.push("/login");
       }

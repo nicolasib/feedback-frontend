@@ -18,7 +18,7 @@ export default function Onboarding() {
     }
     const googleUid = user.uid;
     try {
-      const response = await fetch(`http://localhost:3001/users/${googleUid}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/users/${googleUid}/position-seniority`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
